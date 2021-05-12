@@ -2,6 +2,7 @@ type Query {
       info : String!
       posts : [post!]!
       users : [user!]!
+      topic(topicID: Int!) : topic
       selectUserPosts(userID : Int!) : user!
   }
 
@@ -13,15 +14,21 @@ type Query {
       
   }
 
-  type Mutation {
+  type Mutation{
       createUser(firstName: String!,lastName : String!,pseudo : String!) : user!
-      createPost(userID: Int!,text : String!) :post!
-      updatePost(postID : Int!,text : String!): post!
+      updateUser(userID : Int!, firstName : String,lastName : String, pseudo : String) : updateUserResponse!
+      deleteUser(userID: Int!): String!
+      createPost(userID: Int!, topicID : Int!, text : String!) :post!
+      updatePost(postID : Int!,text : String!): updatePostResponse!
       deletePost(postID : Int!) : String!
+      createTopic(title: String!) : topic!
+      updateTopic(topicID : Int!,title : String!) : updateTopicResponse!
+      deleteTopic(topicID : Int!) : String!
+
       
   }
 
-  
+
 
   type post {
       id: ID!
@@ -35,4 +42,25 @@ type Query {
       lastName : String!
       pseudo : String!
       posts : [post]!
+  }
+
+  type topic {
+      id : ID!,
+      title : String!,
+      posts : [post]!
+  }
+
+  type updateUserResponse {
+      user : user,
+      message : String
+  }
+
+  type updatePostResponse {
+      post : post,
+      message : String
+  }
+
+  type updateTopicResponse {
+      topic : topic,
+      message : String
   }

@@ -18,6 +18,8 @@ type Query {
       createUser(firstName: String!,lastName : String!,pseudo : String!) : user!
       updateUser(userID : Int!, firstName : String,lastName : String, pseudo : String) : updateUserResponse!
       deleteUser(userID: Int!): String!
+      signup(firstName: String!,lastName : String!,pseudo : String!,password : String!) : authPayload!
+      login(pseudo : String!,password : String!): authPayload!
       createPost(userID: Int!, topicID : Int!, text : String!) :post!
       updatePost(postID : Int!,text : String!): updatePostResponse!
       deletePost(postID : Int!) : String!
@@ -41,6 +43,7 @@ type Query {
       firstName : String!
       lastName : String!
       pseudo : String!
+      password : String!
       posts : [post]!
   }
 
@@ -63,4 +66,9 @@ type Query {
   type updateTopicResponse {
       topic : topic,
       message : String
+  }
+
+  type authPayload {
+      user : user,
+      token : String!
   }

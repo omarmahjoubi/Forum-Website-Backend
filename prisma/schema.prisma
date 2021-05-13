@@ -14,7 +14,8 @@ model Users {
   id Int @id @default(autoincrement())
   firstName String
   lastName String
-  pseudo String
+  pseudo String @unique
+  password String
   posts Post[]
 }
 

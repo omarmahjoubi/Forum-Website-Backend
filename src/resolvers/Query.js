@@ -4,7 +4,11 @@ async function topic (parent,args,context) {
             id : args.topicID
         },
         include : {
-            posts : true
+            posts : {
+                include : {
+                    author : true
+                }
+            }         
         }
     })
     return topic
@@ -37,9 +41,24 @@ async function selectUserPosts (parent,args,context) {
     return user
 }
 
+async function userLogin(parent,args,context) {
+    const user = await context.prisma.users.findUnique({
+        where : {
+            pseudo :  args.pseudo
+        },
+        select : {
+            pseudo : true,
+            password : true
+        }
+    });
+    console.log(user)
+    return user;
+}
+
 module.exports = {
     topic,
     posts,
     users,
-    selectUserPosts
+    selectUserPosts,
+    userLogin
 }

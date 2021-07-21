@@ -2,6 +2,7 @@ type Query {
       info : String!
       posts : [post!]!
       users : [user!]!
+      userLogin(pseudo : String!): loginPayload!
       topic(topicID: Int!) : topic
       selectUserPosts(userID : Int!) : user!
   }
@@ -71,4 +72,9 @@ type Query {
   type authPayload {
       user : user,
       token : String!
+  }
+
+  type loginPayload {
+      pseudo : String!,
+      password : String!
   }

@@ -12,10 +12,8 @@ function getUserId(req,authToken) {
             const token = authHeader.replace('Bearer ','')
             if (!token) {
                 throw new Error('No token found')
-            }
-            console.log(token)
+            }           
             const { userId } = getTokenPayload(token)
-            console.log("userid ======> ",userId)
             return userId
         } else if (authToken) {
             const {userId} = getTokenPayload(authToken)

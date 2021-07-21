@@ -38,6 +38,7 @@ const server = new ApolloServer({
         path.join(__dirname,'schema.graphql'),
         'utf8'),
     resolvers,
+    cors : true,
     // pass the prisma client to the graphql server at initialistaion
     context : ({ req }) => {
         return {

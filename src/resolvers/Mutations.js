@@ -40,7 +40,8 @@ async function login(parent,args,context) {
             pseudo : args.pseudo
         }
     })
-    if (!pseudo) {
+    console.log(user)
+    if (!user) {
         throw new Error(`There is no user with this psuedo : ${args.pseudo}`)
     }
     const valid = await bcrypt.compare(args.password,user.password)
@@ -49,7 +50,7 @@ async function login(parent,args,context) {
     }
 
     const token = jwt.sign({ userId : user.id}, APP_SECRET)
-
+    console.log({ user,token})
     return {
         user,
         token
